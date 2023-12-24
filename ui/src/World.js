@@ -1,3 +1,4 @@
+import Asteroid from "./Asteroid";
 import SpaceShip from "./SpaceShip";
 import Stars from "./Stars";
 
@@ -15,16 +16,16 @@ class World {
     this.hero = new SpaceShip({
       x: 250,
       y: 250,
-      shipSrc: "/src/assets/Nairan/base/PNGs/fighter.png",
-      thrusterSrc: "/src/assets/Nairan/engine/PNGs/fighter.png",
+      src: "/src/assets/Nairan/base/PNGs/fighter.png",
+    });
+    this.asteroid = new Asteroid({
+      x: 50,
+      y: 50,
+      src: "/src/assets/environment/asteroids/PNGs/asteroid-1.png",
     });
   }
   clearCanvas() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  }
-  setCanvasBackground() {
-    this.context.fillStyle = "black";
-    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
   setInputControlListeners() {
     window.addEventListener("keydown", (e) => {
@@ -37,12 +38,10 @@ class World {
   runGameLoop() {
     const frame = () => {
       this.clearCanvas();
-      this.setCanvasBackground();
-      this.stars.draw(this.context);
-      this.stars.update(this.canvas);
-      this.stars.animateStars()
-      this.hero.sprite.draw(this.context);
-      this.hero.updatePosition();
+      this.stars.init(this.context, this.canvas);
+      this.hero.init(this.context);
+
+      this.asteroid.sprite.draw(this.context);
       requestAnimationFrame(() => {
         frame();
       });

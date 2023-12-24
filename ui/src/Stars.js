@@ -41,13 +41,18 @@ class Stars {
     for (let i = 0; i < this.stars.length; i++) {
       if (i % 20 === 0) {
         if (this.starFrameCounter % this.starFrameSpeed === 0) {
-          if (this.stars[i].size > 3) this.stars[i].size -= 0.6;
+          if (this.stars[i].size > 3) this.stars[i].size -= 0.7;
           else this.stars[i].size += 0.1;
         }
       }
     }
   }
-  draw(context) {
+  drawBackground(context, canvas) {
+    context.fillStyle = "black";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+  }
+  draw(context, canvas) {
+    this.drawBackground(context, canvas);
     for (const star of this.stars) {
       context.beginPath();
       context.moveTo(star.x + star.size * Math.cos(0), star.y + star.size * Math.sin(0));
@@ -61,6 +66,11 @@ class Stars {
       context.fill();
       context.closePath();
     }
+  }
+  init(context, canvas) {
+    this.draw(context, canvas);
+    this.update(canvas);
+    this.animateStars();
   }
 }
 

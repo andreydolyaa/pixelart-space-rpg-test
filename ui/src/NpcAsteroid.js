@@ -1,5 +1,0 @@
-class NpcAsteroid {
-  constructor(options = {}) {
-    
-  }
-}

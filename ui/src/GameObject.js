@@ -6,8 +6,8 @@ class GameObject {
     this.y = options.y || 0;
     this.sprite = new Sprite({
       gameObject: this,
-      shipSrc: options.shipSrc,
-      thrusterSrc: options.thrusterSrc
+      src: options.src,
+      // thrusterSrc: options.thrusterSrc
     });
   }
 }
