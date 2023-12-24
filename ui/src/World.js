@@ -23,6 +23,11 @@ class World {
       y: 50,
       src: "/src/assets/environment/asteroids/PNGs/asteroid-1.png",
     });
+    this.asteroid2 = new Asteroid({
+      x: -50,
+      y: -50,
+      src: "/src/assets/environment/asteroids/PNGs/asteroid-1.png",
+    });
   }
   clearCanvas() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -32,7 +37,8 @@ class World {
       this.clearCanvas();
       this.stars.init(this.context, this.canvas);
       this.hero.init(this.context);
-      this.asteroid.init(this.context);
+      this.asteroid.init(this.context, 1, 1, 150);
+      this.asteroid2.init(this.context, -1, 1, 60);
 
       requestAnimationFrame(() => {
         frame();
