@@ -28,7 +28,7 @@ class Asteroid extends GameObject {
       this.inputControls.velocity.x = 0;
     }
   }
-  init(context, x, y, size) {
+  render(context, x, y, size) {
     this.sprite.draw(context);
     this.setAsteroidSize(size);
     this.runNpcAutoPosition(x, y);

@@ -7,7 +7,7 @@ class Sprite {
     this.spriteHeight = 64;
     this.spriteSheetCutX = 0;
     this.spriteSheetCutY = 0;
-    this.imageScale = 150;
+    this.imageScale = 100;
 
     this.image.onload = () => {
       this.isImageLoaded = true;

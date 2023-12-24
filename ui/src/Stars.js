@@ -67,7 +67,7 @@ class Stars {
       context.closePath();
     }
   }
-  init(context, canvas) {
+  render(context, canvas) {
     this.draw(context, canvas);
     this.update(canvas);
     this.animateStars();

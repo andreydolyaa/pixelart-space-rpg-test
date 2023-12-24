@@ -35,10 +35,10 @@ class World {
   runGameLoop() {
     const frame = () => {
       this.clearCanvas();
-      this.stars.init(this.context, this.canvas);
-      this.hero.init(this.context);
-      this.asteroid.init(this.context, 1, 1, 150);
-      this.asteroid2.init(this.context, -1, 1, 60);
+      this.stars.render(this.context, this.canvas);
+      this.hero.render(this.context, this.canvas);
+      this.asteroid.render(this.context, 1, 1, 150);
+      this.asteroid2.render(this.context, -1, 1, 60);
 
       requestAnimationFrame(() => {
         frame();
