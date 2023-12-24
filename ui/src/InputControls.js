@@ -3,8 +3,15 @@ class InputControls {
     this.x = options.x;
     this.y = options.y;
     this.npc = options.npc || false;
+    this.speed = -2;
+    this.map = {
+      w: ["y", this.speed],
+      s: ["y", this.speed * -1],
+      a: ["x", this.speed],
+      d: ["x", this.speed * -1],
+    };
     this.velocity = {
-      main: 1,
+      main: 1.5,
       x: 0,
       y: 0,
     };
@@ -24,21 +31,13 @@ class InputControls {
     return [this.x, this.y];
   }
   inputControl(e) {
-    const inputsMap = {
-      ArrowUp: ["y", -2],
-      ArrowDown: ["y", 2],
-      ArrowLeft: ["x", -2],
-      ArrowRight: ["x", 2],
-    };
-    const input = inputsMap[e.key];
-    if (e.type === "keydown") {
-      if (input) {
-        this.velocity[input[0]] = input[1] * this.velocity.main;
-      }
-    } else if (e.type === "keyup") {
-      if (input) {
-        this.velocity[input[0]] = 0;
-      }
+    const pressed = e.type === "keydown";
+    const released = e.type === "keyup";
+    const input = this.map[e.key];
+    if (pressed) {
+      this.velocity[input[0]] = input[1] * this.velocity.main;
+    } else if (released) {
+      this.velocity[input[0]] = 0;
     }
   }
 }

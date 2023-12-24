@@ -19,7 +19,7 @@ class SpaceShip extends GameObject {
       this.isThrusterLoaded = true;
     };
   }
-  animateTrusterClosure() {
+  thrusterAnimation() {
     return () => {
       if (this.thrusterRate === this.thrusterSpriteWidth) {
         this.thrusterRate = this.sprite.spriteWidth;
@@ -36,10 +36,10 @@ class SpaceShip extends GameObject {
   }
   drawThruster(context) {
     if (this.isThrusterLoaded && this.isTrusterEnabled) {
-      const animateThruster = this.animateTrusterClosure();
+      const animate = this.thrusterAnimation();
       context.drawImage(
         this.thrusterImage,
-        animateThruster(),
+        animate(),
         this.sprite.spriteSheetCutY,
         this.sprite.spriteWidth,
         this.sprite.spriteHeight,
