@@ -3,19 +3,11 @@ class Sprite {
     this.gameObject = options.gameObject;
     this.image = new Image();
     this.image.src = options.src;
-    this.spriteSizeWidth = 64;
-    this.spriteSizeHeight = 64;
-    this.imageScale = 150;
-
-    this.directions = {
-      imagePositionX: this.gameObject.x || 250,
-      imagePositionY: this.gameObject.y || 250,
-      imageVelocityX: 0,
-      imageVelocityY: 0,
-    };
-
+    this.spriteWidth = 64;
+    this.spriteHeight = 64;
     this.spriteSheetCutX = 0;
     this.spriteSheetCutY = 0;
+    this.imageScale = 150;
 
     this.image.onload = () => {
       this.isImageLoaded = true;
@@ -27,10 +19,10 @@ class Sprite {
         this.image,
         this.spriteSheetCutX,
         this.spriteSheetCutY,
-        this.spriteSizeWidth,
-        this.spriteSizeHeight,
-        this.directions.imagePositionX,
-        this.directions.imagePositionY,
+        this.spriteWidth,
+        this.spriteHeight,
+        this.gameObject.x,
+        this.gameObject.y,
         this.imageScale,
         this.imageScale
       );

@@ -1,4 +1,5 @@
 import GameObject from "./GameObject";
+import InputControls from "./InputControls";
 
 class SpaceShip extends GameObject {
   constructor(options = {}) {
@@ -11,42 +12,17 @@ class SpaceShip extends GameObject {
     this.thrusterSpeed = 64;
     this.thrusterFrameCounter = 0;
     this.thrusterSpriteWidth = 512;
-    this.imageVelocityMain = 1;
+
+    this.inputControls = new InputControls({ x: this.x, y: this.y, npc: false });
 
     this.thrusterImage.onload = () => {
       this.isThrusterLoaded = true;
     };
   }
-  updatePosition() {
-    this.sprite.directions.imagePositionX += this.sprite.directions.imageVelocityX;
-    this.sprite.directions.imagePositionY += this.sprite.directions.imageVelocityY;
-  }
-  inputControl(e) {
-    const inputsMap = {
-      ArrowUp: ["imageVelocityY", -2],
-      ArrowDown: ["imageVelocityY", 2],
-      ArrowLeft: ["imageVelocityX", -2],
-      ArrowRight: ["imageVelocityX", 2],
-    };
-    const input = inputsMap[e.key];
-    if (e.type === "keydown") {
-      if (input) {
-        // this.sprite.isTrusterEnabled = true;
-        this.keyState[e.key] = true;
-        this.sprite.directions[input[0]] = input[1] * this.imageVelocityMain;
-      }
-    } else if (e.type === "keyup") {
-      if (input) {
-        // this.sprite.isTrusterEnabled = false;
-        this.keyState[e.key] = false;
-        this.sprite.directions[input[0]] = 0;
-      }
-    }
-  }
   animateTrusterClosure() {
     return () => {
       if (this.thrusterRate === this.thrusterSpriteWidth) {
-        this.thrusterRate = this.sprite.spriteSizeWidth;
+        this.thrusterRate = this.sprite.spriteWidth;
       } else {
         if (this.thrusterFrameCounter === 10) {
           this.thrusterFrameCounter = 0;
@@ -65,19 +41,24 @@ class SpaceShip extends GameObject {
         this.thrusterImage,
         animateThruster(),
         this.sprite.spriteSheetCutY,
-        this.sprite.spriteSizeWidth,
-        this.sprite.spriteSizeHeight,
-        this.sprite.directions.imagePositionX,
-        this.sprite.directions.imagePositionY,
+        this.sprite.spriteWidth,
+        this.sprite.spriteHeight,
+        this.x,
+        this.y,
         this.sprite.imageScale,
         this.sprite.imageScale
       );
     }
   }
+  handleNewPositionUpdates(data) {
+    const [x, y] = data;
+    this.x = x;
+    this.y = y;
+  }
   init(context) {
     this.drawThruster(context);
     this.sprite.draw(context);
-    this.updatePosition();
+    this.handleNewPositionUpdates(this.inputControls.updatePosition());
   }
 }
 

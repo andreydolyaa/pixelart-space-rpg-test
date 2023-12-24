@@ -10,7 +10,7 @@ class World {
     this.stars = new Stars({
       context: this.context,
       canvas: this.canvas,
-      amount: 1000,
+      amount: 3500,
       sizes: [0.5, 1.5],
     });
     this.hero = new SpaceShip({
@@ -27,26 +27,18 @@ class World {
   clearCanvas() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
-  setInputControlListeners() {
-    window.addEventListener("keydown", (e) => {
-      this.hero.inputControl(e);
-    });
-    window.addEventListener("keyup", (e) => {
-      this.hero.inputControl(e);
-    });
-  }
   runGameLoop() {
     const frame = () => {
       this.clearCanvas();
       this.stars.init(this.context, this.canvas);
       this.hero.init(this.context);
+      this.asteroid.init(this.context);
 
-      this.asteroid.sprite.draw(this.context);
       requestAnimationFrame(() => {
         frame();
       });
     };
-    this.setInputControlListeners();
+
     frame();
   }
   init() {
