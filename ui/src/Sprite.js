@@ -14,7 +14,6 @@ class Sprite {
       imageVelocityY: 0,
     };
 
-    this.imageVelocityMain = 1;
     this.spriteSheetCutX = 0;
     this.spriteSheetCutY = 0;
 

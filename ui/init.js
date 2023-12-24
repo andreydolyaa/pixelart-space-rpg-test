@@ -7,7 +7,7 @@ function init() {
   world.init();
   setTimeout(() => {
     audio.play();
-  }, 100);
+  }, 300);
 }
 
 init();

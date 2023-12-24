@@ -11,6 +11,7 @@ class SpaceShip extends GameObject {
     this.thrusterSpeed = 64;
     this.thrusterFrameCounter = 0;
     this.thrusterSpriteWidth = 512;
+    this.imageVelocityMain = 1;
 
     this.thrusterImage.onload = () => {
       this.isThrusterLoaded = true;
@@ -32,7 +33,7 @@ class SpaceShip extends GameObject {
       if (input) {
         // this.sprite.isTrusterEnabled = true;
         this.keyState[e.key] = true;
-        this.sprite.directions[input[0]] = input[1] * this.sprite.imageVelocityMain;
+        this.sprite.directions[input[0]] = input[1] * this.imageVelocityMain;
       }
     } else if (e.type === "keyup") {
       if (input) {
