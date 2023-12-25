@@ -6,7 +6,7 @@ function init() {
   const world = new World({});
   world.init();
   setTimeout(() => {
-    audio.play();
+    // audio.play();
   }, 300);
 }
 

@@ -8,8 +8,10 @@ class SpaceShip extends GameObject {
     this.keyState = {};
     this.thrusterImage = new Image();
     this.weaponImage = new Image();
+    this.shootingImage = new Image();
     this.thrusterImage.src = "/src/assets/Nairan/engine/PNGs/fighter.png";
     this.weaponImage.src = "/src/assets/Nairan/weapons/PNGs/fighter.png";
+    this.shootingImage.src = "/src/assets/Nairan/effects/PNGs/rocket.png";
     this.isTrusterEnabled = true;
 
     this.inputControls = new InputControls({ x: this.x, y: this.y, npc: false });
@@ -21,11 +23,18 @@ class SpaceShip extends GameObject {
       frameSpeed: 7,
     });
 
-    this.animateShooting = new SpriteAnimation({
+    this.animateWeapons = new SpriteAnimation({
       animationRate: 64,
       animationSpeed: 64,
       animationSpriteWidth: 1792,
-      frameSpeed: 1,
+      frameSpeed: 10,
+    });
+
+    this.animateShooting = new SpriteAnimation({
+      animationRate: 64,
+      animationSpeed: 64,
+      animationSpriteWidth: 36,
+      frameSpeed: 7,
     });
 
     this.thrusterImage.onload = () => {
@@ -34,6 +43,10 @@ class SpaceShip extends GameObject {
 
     this.weaponImage.onload = () => {
       this.isWeaponLoaded = true;
+    };
+
+    this.shootingImage.onload = () => {
+      this.isShootingLoaded = true;
     };
   }
 
@@ -55,7 +68,8 @@ class SpaceShip extends GameObject {
   }
   drawShooting(context) {
     if (this.isWeaponLoaded && this.inputControls.shooting) {
-      const animate = this.animateShooting.animate();
+      const animate = this.animateWeapons.animate();
+      this.shootingAnimation = this.animateShooting.animate();
       context.drawImage(
         this.weaponImage,
         animate(),
@@ -67,6 +81,7 @@ class SpaceShip extends GameObject {
         this.sprite.imageScale,
         this.sprite.imageScale
       );
+      // TODO: handle rockets render
     }
   }
   handleNewPositionUpdates(data) {
